@@ -18,9 +18,12 @@ response = client.chat.completions.create(
     messages=[
         {
             "role": "user",
-            "content": "Can you describe to yourself to me?"
+            "content": "Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
         }
     ],
 )
-
-print(response.choices[0].message.content)
+if response.usage is not None:
+    print(f"Prompt tokens: {response.usage.prompt_tokens}")
+    print(f"Reponse tokens: {response.usage.completion_tokens}")
+else:
+    raise RuntimeError("response.usage is None")
